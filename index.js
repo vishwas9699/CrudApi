@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const Product = require("./models/product.model");
+require("dotenv").config();
 
 const app = express();
 app.use(express.json());
@@ -19,13 +20,11 @@ app.post("/api/products", async (req, res) => {
 });
 
 mongoose
-  .connect(
-    "mongodb+srv://vvishwas179:lpxJ7htkfcTkx8wN@backenddb.m0yafu4.mongodb.net/Node-API?retryWrites=true&w=majority&appName=BackendDB"
-  )
+  .connect(process.env.DB_URL)
   .then(() => {
     console.log("Connected to DataBase!");
-    app.listen(3000, () => {
-      console.log("Server is running on port 3000");
+    app.listen(process.env.PORT, () => {
+      console.log(`Server is running on port ${process.env.PORT}`);
     });
   })
   .catch((err) => {
