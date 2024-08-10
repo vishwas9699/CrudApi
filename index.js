@@ -2,21 +2,17 @@ const express = require("express");
 const mongoose = require("mongoose");
 const Product = require("./models/product.model");
 require("dotenv").config();
-
 const app = express();
+
+//middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+//routes
+app.use("/api/products", productRoute);
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
-});
-
-app.post("/api/products", async (req, res) => {
-  try {
-    const product = await Product.create(req.body);
-    res.status(200).json(product);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+  res.send("Hello from Node API Server Updated");
 });
 
 mongoose
