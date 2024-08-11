@@ -58,10 +58,6 @@ const gymRegistrationSchema = mongoose.Schema(
       type: String,
       required: [true, "enquiryDate is required"],
     },
-    id: {
-      type: Number,
-      required: [true, "haveGymBefore is required"],
-    },
   },
   {
     timestamps: true,

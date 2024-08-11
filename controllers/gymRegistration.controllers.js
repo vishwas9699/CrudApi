@@ -12,7 +12,7 @@ const getRegistration = async (req, res) => {
 const getSingleRegistration = async (req, res) => {
   try {
     const { id } = req.params;
-    const registration = await gymRegistration.find({ id: id });
+    const registration = await gymRegistration.findById(id);
     res.status(200).json(registration);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -31,10 +31,7 @@ const addRegistration = async (req, res) => {
 const updateRegistrationById = async (req, res) => {
   try {
     const { id } = req.params;
-    const registration = await gymRegistration.findOneAndUpdate(
-      { id: id },
-      req.body
-    );
+    const registration = await gymRegistration.findByIdAndUpdate(id, req.body);
     if (!registration) {
       return res
         .status(404)
@@ -50,7 +47,7 @@ const updateRegistrationById = async (req, res) => {
 const deleteRegistrationById = async (req, res) => {
   try {
     const { id } = req.params;
-    const registration = await gymRegistration.deleteOne({ id: id });
+    const registration = await gymRegistration.findByIdAndDelete(id);
     if (!registration) {
       return res
         .status(404)
