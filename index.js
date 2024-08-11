@@ -8,7 +8,14 @@ require("dotenv").config();
 const app = express();
 
 // Advanced usage to allow specific origins
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://gymregistrationapp.onrender.com", // Replace with your frontend domain
+    methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
+    credentials: false, // Allow credentials (cookies, authorization headers, etc.)
+  })
+);
 
 //middleware
 app.use(express.json());
